@@ -10,13 +10,7 @@ import (
 	"loan.com/repositories"
 )
 
-type TransferOpt struct {
-	AccountNumberSource      string
-	AccountNumberDestination string
-	Amount                   float64
-}
-
-func (u *loan) Pay(ctx context.Context, loanID int32, amount float64) error {
+func (u *payment) Pay(ctx context.Context, loanID int32, amount float64) error {
 	loan, err := u.loanRepo.Get(ctx, loanID)
 	if err != nil {
 		return customerr.StackTrace(err)

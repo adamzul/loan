@@ -1,17 +1,13 @@
 package payment
 
-import (
-	"loan.com/repositories/executor"
-)
-
-type loan struct {
-	trx         executor.Transaction
+type payment struct {
+	trx         transaction
 	paymentRepo paymentRepo
 	loanRepo    loanRepo
 }
 
-func New(trx executor.Transaction, loanRepo loanRepo, paymentRepo paymentRepo) *loan {
-	return &loan{
+func New(trx transaction, loanRepo loanRepo, paymentRepo paymentRepo) *payment {
+	return &payment{
 		trx:         trx,
 		loanRepo:    loanRepo,
 		paymentRepo: paymentRepo,

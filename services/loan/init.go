@@ -1,21 +1,17 @@
 package loan
 
-import (
-	"loan.com/repositories/executor"
-)
+import "github.com/benbjohnson/clock"
 
 type loan struct {
-	trx         executor.Transaction
-	accountRepo accountRepo
 	paymentRepo paymentRepo
 	loanRepo    loanRepo
+	clock       clock.Clock
 }
 
-func New(trx executor.Transaction, accountRepo accountRepo, loanRepo loanRepo, paymentRepo paymentRepo) *loan {
+func New(loanRepo loanRepo, paymentRepo paymentRepo, clock clock.Clock) *loan {
 	return &loan{
-		trx:         trx,
-		accountRepo: accountRepo,
 		paymentRepo: paymentRepo,
 		loanRepo:    loanRepo,
+		clock:       clock,
 	}
 }

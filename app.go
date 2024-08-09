@@ -3,6 +3,7 @@ package application
 import (
 	"log"
 
+	"github.com/benbjohnson/clock"
 	"github.com/go-playground/validator/v10"
 	"loan.com/config"
 	"loan.com/connection"
@@ -24,11 +25,10 @@ func Start(cfg *config.Config) {
 	executorRepo := executor.New(&replicationDB)
 	transactionRepo := executor.NewTransaction(&replicationDB)
 
-	accountRepo := repositories.NewAccount(&executorRepo)
 	paymentRepo := repositories.NewPayment(&executorRepo)
 	loanRepo := repositories.NewLoan(&executorRepo)
-
-	loanSvc := loan.New(transactionRepo, accountRepo, loanRepo, paymentRepo)
+	clock := clock.New()
+	loanSvc := loan.New(loanRepo, paymentRepo, clock)
 	paymentSvc := payment.New(transactionRepo, loanRepo, paymentRepo)
 
 	balanceHandler := handlers.NewLoanHandler(validator.New(), loanSvc)

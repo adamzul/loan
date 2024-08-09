@@ -3,7 +3,6 @@ package loan
 import (
 	"context"
 	"math"
-	"time"
 
 	"loan.com/helper/customerr"
 )
@@ -19,7 +18,7 @@ func (u *loan) IsUserDelinquent(ctx context.Context, loanID int32) (bool, error)
 		return false, customerr.StackTrace(err)
 	}
 
-	now := time.Now()
+	now := u.clock.Now()
 	durationDay := now.Sub(loan.CreatedAt).Hours() / 24
 	durationWeek := int(math.Ceil(durationDay / 7))
 	if durationWeek-int(count) >= 2 {
