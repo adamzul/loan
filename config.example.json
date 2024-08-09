@@ -1,0 +1,33 @@
+{
+    "postgres":{
+        "primary":{
+            "username":"postgres",
+            "password":"root",
+            "name":"loan",
+            "host":"localhost",
+            "port":"5432",
+            "max-open":10,
+            "max-idle":5,
+            "max-idle-time":"10m"
+        },
+        "standby":{
+            "username":"postgres",
+            "password":"root",
+            "name":"loan",
+            "host":"localhost",
+            "port":"5432",
+            "max-open":10,
+            "max-idle":5,
+            "max-idle-time":"10m"
+        }
+    },
+    "auth":{
+        "access_secret":"random",
+        "refresh_secret":"random"
+    },
+    "http":{
+        "port":"8080",
+        "host":"localhost",
+        "expose_port":"9090"
+    }
+}
